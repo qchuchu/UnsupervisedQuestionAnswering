@@ -129,13 +129,10 @@ dmypy.json
 .vscode/
 
 #fquad data
-data/
 notebook_data/file_index.txt
 
 #different indexes
 indexes/
-
-dev_resources/
 
 #contexts embedding
 contexts/
