@@ -138,8 +138,6 @@ train_dataset_fquad_creator.py
 
 sentence_similarity_training_camembert.py
 
-assets/
-
 camembert-fine-tuned/
 
 camembert_fine_tuned_13000_tokens_old/
