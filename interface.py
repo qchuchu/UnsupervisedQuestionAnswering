@@ -12,19 +12,19 @@ from utils.camembert_question_answering_wrapper import CamembertQuestionAnswerin
 @click.command()
 @click.option("-c", "--count", default=10, help="Number of results.", type=int)
 @click.option(
-    "-n", "--collection_name", default="fquad", help="Collection Name", type=str
+    "-n", "--collection_name", default="wiki_context", help="Collection Name", type=str
 )
 @click.option(
     "-w",
     "--weighting_model",
-    default="tw-idf",
+    default="okapi-bm25",
     type=click.Choice(["tw-idf", "tf-idf", "okapi-bm25"], case_sensitive=False),
     help="Weighting Type.",
 )
 @click.option(
     "-m",
     "--embedding_model",
-    default="camembert-base",
+    default="camembert-fquad",
     help="Context Embedding Model",
     type=str,
 )
@@ -32,7 +32,7 @@ from utils.camembert_question_answering_wrapper import CamembertQuestionAnswerin
 @click.option(
     "-M",
     "--mean_tokens",
-    default=True,
+    default=False,
     help="Taking into account the mean of the embedding of each token",
     type=bool,
 )
@@ -60,9 +60,15 @@ from utils.camembert_question_answering_wrapper import CamembertQuestionAnswerin
 @click.option(
     "-r",
     "--context_retrieval",
-    default=True,
+    default=False,
     help="If you want to make a deeper search on the contexts inside a document or not",
     type=bool,
+)
+@click.option(
+    "-q",
+    "--question_answering_label",
+    default="./camembert_fine_tuned_13000_questions",
+    help="Question Answering"
 )
 def interface(
     count,
@@ -75,6 +81,7 @@ def interface(
     max_tokens,
     document_tokenizer,
     context_retrieval,
+    question_answering_label
 ):
     text_transformer = TextTransformer(
         lemmatizer_label=lemmatizer,
@@ -92,7 +99,7 @@ def interface(
         weighting_model=weighting_model,
     )
     question_answering_model = CamembertQuestionAnsweringWrapper(
-        "./camembert_fine_tuned_13000_tokens"
+        question_answering_label
     )
     click.clear()
 
@@ -149,7 +156,7 @@ def interface(
                 )
 
     while True:
-        result = pyfiglet.figlet_format("Fquad Context Retrieval", font="big")
+        result = pyfiglet.figlet_format("Alexa 4.0", font="big")
         click.secho(result, fg="red", bold=True)
         user_query = click.prompt(
             click.style("Please enter you query", fg="blue", bold=True), type=str

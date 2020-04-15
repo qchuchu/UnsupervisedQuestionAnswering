@@ -128,30 +128,20 @@ dmypy.json
 .idea/
 .vscode/
 
-#fquad data
-notebook_data/file_index.txt
-
-#different indexes
-indexes/
-
-#contexts embedding
-contexts/
 
 #Training dataset
 FQuad/
 
-#Trained camembert
 
+#Trained camembert
 train_dataset_fquad_creator.py
 
 sentence_similarity_training_camembert.py
-
-results/
 
 assets/
 
 camembert-fine-tuned/
 
-camembert_fine_tuned_13000_tokens/
+camembert_fine_tuned_13000_tokens_old/
 
 
